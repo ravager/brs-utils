@@ -68,6 +68,17 @@ function buTypeUtilsTests() as Object
             buTest().assertFalse(buTypeUtils().isComparable({}))
         end function,
 
+        testIsNumber: function() as Void
+            buTest().assertTrue(buTypeUtils().isNumber(1))
+            buTest().assertTrue(buTypeUtils().isNumber(1.1!))
+            buTest().assertTrue(buTypeUtils().isNumber(1.1#))
+            buTest().assertFalse(buTypeUtils().isNumber("1"))
+            buTest().assertFalse(buTypeUtils().isNumber(true))
+            buTest().assertFalse(buTypeUtils().isNumber(Invalid))
+            buTest().assertFalse(buTypeUtils().isNumber([1,2,3]))
+            buTest().assertFalse(buTypeUtils().isNumber({}))
+        end function,
+
         addSuite: function() as Void
             suite = {
                 name: "buTypeUtilsTests",
@@ -79,7 +90,8 @@ function buTypeUtilsTests() as Object
                     { name: "testIsDouble", test: m.testIsDouble },
                     { name: "testIsArray", test: m.testIsArray },
                     { name: "testIsList", test: m.testIsList },
-                    { name: "testIsComparable", test: m.testIsComparable }
+                    { name: "testIsComparable", test: m.testIsComparable },
+                    { name: "testIsNumber", test: m.testIsNumber }
                 ]
             }
 

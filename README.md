@@ -19,6 +19,7 @@ This includes:
 * isFloat
 * isDouble
 * isComparable
+* isNumber
 
 ## buStringUtils
 
