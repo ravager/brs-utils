@@ -183,15 +183,30 @@ function buStringUtils() as Object
                 roRegex = createObject("roRegex", pattern, "")
                 return roRegex.replace(text, replacement)
             end function,
-            
+
             toMD5Hash: function(text as String) as String
-                ba = CreateObject("roByteArray")
-                ba.fromAsciiString(text)
-                digest = CreateObject("roEVPDigest")
-                digest.Setup("md5")
-                result = digest.Process(ba)
-                return result
-            end function
+                return m._hash(text, "md5")
+            end function,
+
+            toSHA1Hash: function(text as String) as String
+                return m._hash(text, "sha1")
+            end function,
+
+            toSHA256Hash: function(text as String) as String
+                return m._hash(text, "sha256")
+            end function,
+
+            toSHA512Hash: function(text as String) as String
+                return m._hash(text, "sha512")
+            end function,
+
+            _hash: function(text as Object, algorithm = "md5" as String) as String
+                ba = createObject("roByteArray")
+                ba.fromASCIIString(text)
+                digest = createObject("roEVPDigest")
+                digest.setup(algorithm)
+                return digest.process(ba)
+            end function,
 
             ' Converts anything to a string, even an Invalid value.
             ' @param {Dynamic} the value to convert to a string.

@@ -41,6 +41,9 @@ This includes:
 * reverse
 * replace
 * toMD5Hash
+* toSHA1Hash
+* toSHA256Hash
+* toSHA512Hash
 * toString
 
 ## buNumbersUtils

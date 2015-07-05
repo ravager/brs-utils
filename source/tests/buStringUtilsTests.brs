@@ -98,7 +98,31 @@ function buStringUtilsTests() as Object
             c = buStringUtils().toMD5Hash("Lorem Ipsum 2")
             buTest().assertEquals(a, b)
             buTest().assertFalse(a = c)
-        end function
+        end function,
+
+        testToSHA1Hash: function() as Void
+            a = buStringUtils().toSHA1Hash("Lorem Ipsum")
+            b = buStringUtils().toSHA1Hash("Lorem Ipsum")
+            c = buStringUtils().toSHA1Hash("Lorem Ipsum 2")
+            buTest().assertEquals(a, b)
+            buTest().assertFalse(a = c)
+        end function,
+
+        testToSHA256Hash: function() as Void
+            a = buStringUtils().toSHA256Hash("Lorem Ipsum")
+            b = buStringUtils().toSHA256Hash("Lorem Ipsum")
+            c = buStringUtils().toSHA256Hash("Lorem Ipsum 2")
+            buTest().assertEquals(a, b)
+            buTest().assertFalse(a = c)
+        end function,
+
+        testToSHA512Hash: function() as Void
+            a = buStringUtils().toSHA512Hash("Lorem Ipsum")
+            b = buStringUtils().toSHA512Hash("Lorem Ipsum")
+            c = buStringUtils().toSHA512Hash("Lorem Ipsum 2")
+            buTest().assertEquals(a, b)
+            buTest().assertFalse(a = c)
+        end function,
 
         addSuite: function() as Void
             suite = {
@@ -119,7 +143,10 @@ function buStringUtilsTests() as Object
                     { name: "testToArray", test: m.testToArray },
                     { name: "testReverse", test: m.testReverse },
                     { name: "testReplace", test: m.testReplace },
-                    { name: "testToMD5Hash", test: m.testToMD5Hash }
+                    { name: "testToMD5Hash", test: m.testToMD5Hash },
+                    { name: "testToMD5Hash", test: m.testToSHA1Hash },
+                    { name: "testToMD5Hash", test: m.testToSHA256Hash },
+                    { name: "testToMD5Hash", test: m.testToSHA512Hash }
                 ]
             }
 
