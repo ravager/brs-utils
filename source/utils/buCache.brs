@@ -1,11 +1,11 @@
 '
-' A Cache singleton for String data (i.e. JSON or XML data). For usage check the test bellow.
+' A Cache singleton for String data (i.e. JSON or XML data). For usage check the tests file.
 ' We can store any data since the cache stores this data in the Roku
 ' /tmp folder and only keeps in memory a reference for this data in an array.
 ' This reference array has a maximum size of maxSize elements.
 ' Take into account that this folder is deleted each time the application quits.
 '
-function getCache() as Object
+function buCache() as Object
 
     if m.cache = Invalid then
         ' first time we run, create the cache folder
@@ -31,8 +31,8 @@ function getCache() as Object
             ' @param {Integer} TTL of the cached data in seconds
             ' @return {String} the created MD5 key for this cached object (not usable)
             add: function(rawKey as String, data as String, ttl as Integer) as Dynamic
-                key = toMD5Hash(rawKey)
-                obj = getCacheObject(key, ttl)
+                key = buStringUtils().toMD5Hash(rawKey)
+                obj = buCacheObject(key, ttl)
 
                 m._flush() ' first flush the cache
 
@@ -52,7 +52,7 @@ function getCache() as Object
             ' @param {String} rawKey a unique String for the operation (i.e. the URI)
             ' @return {Dynamic} the data stored (String) or Invalid if nothing is here
             get: function(rawKey as String) as Dynamic
-                key = toMD5Hash(rawKey)
+                key = buStringUtils().toMD5Hash(rawKey)
                 cached = m._getElement(key)
 
                 if cached = Invalid then
@@ -61,12 +61,12 @@ function getCache() as Object
                 end if
 
                 if not m._checkTTL(cached) then
-                    m.logger.debug("TTL passed. Deleting {0} from cache", rawKey)
+                    m.logger.debug("TTL expired. Deleting {0} from cache", rawKey)
                     m._removeElement(key)
                     return Invalid
                 end if
 
-                m.logger.info("Cache Hit for: {0}", rawKey)
+                m.logger.debug("Cache Hit for: {0}", rawKey)
                 return m._read(key)
             end function
 
@@ -150,7 +150,7 @@ end function
 ' An object to be used a reference to the stored data.
 ' @param {String} a UUID identifying this reference
 ' @param {Integer} the TTL of this reference
-function getCacheObject(key as String, ttl as Integer) as Object
+function buCacheObject(key as String, ttl as Integer) as Object
     return {
         key:        key,
         ttl:        ttl,

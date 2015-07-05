@@ -18,5 +18,6 @@ sub runTests()
     buNumbersUtilsTests()
     buSetTests()
     buRandomUtilsTests()
+    buCacheTests()
     buTest().runAllTests()
 end sub

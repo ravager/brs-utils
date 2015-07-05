@@ -97,3 +97,6 @@ present, isPresent() will return true and get() will return the value.
 
 ## buSet
 A very simplistic Set implementation. Only works with BrightScript primitives
+
+## buCache
+A Cache singleton for String data (i.e. JSON or XML data) in the Roku `tmp:` storage
