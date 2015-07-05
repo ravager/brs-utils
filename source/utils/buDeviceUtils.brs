@@ -4,6 +4,9 @@
 function buDeviceUtils() as Object
     if(m.buDeviceUtils = Invalid) then
         m.buDeviceUtils = {
+
+            ' Reads from the manifest the application version
+            ' @return {String} with the version like 0.0.1
             getAppVersion: function() as String
                 majorVsersion = "0"
                 minorVersion = "0"
@@ -35,6 +38,8 @@ function buDeviceUtils() as Object
                 return majorVersion + "." + minorVersion + "." + buildVersion
             end function,
 
+            ' Get the device resolution
+            ' @returns {String} HD or SD
             getResolution: function() as String
                 roInfo = createObject("roDeviceInfo")
                 if roInfo.getDisplayMode() = "480i" then
@@ -44,6 +49,8 @@ function buDeviceUtils() as Object
                 end if
             end function,
 
+            ' Get the device's firmware version
+            ' @return {String} the version of the firmware
             getFirmwareVersion: function() as String
                 roInfo = createObject("roDeviceInfo")
                 v = roInfo.getVersion()
@@ -52,18 +59,28 @@ function buDeviceUtils() as Object
                 return major + "." + minor
             end function,
 
+            ' Get the device configured language
+            ' @return {String} the language converted to en-GB or en-US
             getCurrentLanguage: function() as String
                 roInfo = createObject("roDeviceInfo")
                 locale = roInfo.getCurrentLocale()
                 return buStringUtils().replace(locale, "_", "-")
             end function,
 
+            ' Writes an entry to the registry
+            ' @param {String} key the key of the value
+            ' @param {String} value the value
+            ' @param {String} the section, defaults to default_section
             writeEntry: function(key as String, value as String, section = "default_section" as String) as Void
                 roRegistry = createObject("roRegistrySection", section)
                 roRegistry.write(key, value)
                 roRegistry.flush()
             end function,
 
+            ' Reads an entry from the registry
+            ' @param {String} key the key of the value
+            ' @param {String} the section, defaults to default_section
+            ' @returns {buOptional}
             readEntry: function(key as String, section = "default_section" as String) as Object
                 roRegistry = createObject("roRegistrySection", section)
 
@@ -76,6 +93,9 @@ function buDeviceUtils() as Object
                 return buOptional(res)
             end function,
 
+            ' List all entries of a section from the registry
+            ' @param {String} the section, defaults to default_section
+            ' @returns {roAssociativeArray} all key values of the section
             listEntries: function(section = "default_section" as String) as Object
                 roRegistry = createObject("roRegistrySection", section)
                 allKeys = roRegistry.getKeyList()
@@ -88,11 +108,16 @@ function buDeviceUtils() as Object
                 return res
             end function,
 
+            ' List all sections from the registry
+            ' @returns {roArray} all the sections
             listSections: function() as Object
                 roRegistry = createObject("roRegistry")
                 return roRegistry.getSectionList()
             end function,
 
+            ' Deletes an entry from the registry
+            ' @param {String} key the key of the value
+            ' @param {String} the section, defaults to default_section
             deleteEntry: function(key as String, section = "default_section" as String) as Void
                 roRegistry = createObject("roRegistrySection", section)
 
@@ -102,6 +127,8 @@ function buDeviceUtils() as Object
                 end if
             end function,
 
+            ' Deletes all entries from the registry
+            ' @param {String} the section, defaults to default_section
             deleteAllEntries: function(section = "default_section" as String) as Void
                 roRegistry = createObject("roRegistrySection", section)
 
