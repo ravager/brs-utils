@@ -182,6 +182,15 @@ function buStringUtils() as Object
             replace: function(text as String, pattern as String, replacement as String) as String
                 roRegex = createObject("roRegex", pattern, "")
                 return roRegex.replace(text, replacement)
+            end function,
+            
+            toMD5Hash: function(text as String) as String
+                ba = CreateObject("roByteArray")
+                ba.fromAsciiString(text)
+                digest = CreateObject("roEVPDigest")
+                digest.Setup("md5")
+                result = digest.Process(ba)
+                return result
             end function
 
             ' Converts anything to a string, even an Invalid value.

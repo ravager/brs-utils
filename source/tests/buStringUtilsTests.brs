@@ -92,6 +92,14 @@ function buStringUtilsTests() as Object
             buTest().assertEquals(buStringUtils().replace("Lorem, Ipsum", ",", "."), "Lorem. Ipsum")
         end function,
 
+        testToMD5Hash: function() as Void
+            a = buStringUtils().toMD5Hash("Lorem Ipsum")
+            b = buStringUtils().toMD5Hash("Lorem Ipsum")
+            c = buStringUtils().toMD5Hash("Lorem Ipsum 2")
+            buTest().assertEquals(a, b)
+            buTest().assertFalse(a = c)
+        end function
+
         addSuite: function() as Void
             suite = {
                 name: "buStringUtilsTests",
@@ -110,7 +118,8 @@ function buStringUtilsTests() as Object
                     { name: "testJoin", test: m.testJoin },
                     { name: "testToArray", test: m.testToArray },
                     { name: "testReverse", test: m.testReverse },
-                    { name: "testReplace", test: m.testReplace }
+                    { name: "testReplace", test: m.testReplace },
+                    { name: "testToMD5Hash", test: m.testToMD5Hash }
                 ]
             }
 
