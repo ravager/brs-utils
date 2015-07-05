@@ -52,7 +52,6 @@ function buDeviceUtilsTests() as Object
                 tests: [
                     { name: "testRegistryUtils", test: m.testRegistryUtils },
                     { name: "testDeleteAllEntries", test: m.testDeleteAllEntries },
-                    { name: "testInfoUtils", test: m.testInfoUtils },
                     { name: "testListEntries", test: m.testListEntries },
                     { name: "testListSections", test: m.testListSections },
                     { name: "testInfoUtils", test: m.testInfoUtils },
