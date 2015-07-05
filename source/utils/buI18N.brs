@@ -1,13 +1,17 @@
 '
 ' Retrieve translation keys from translation file.
 ' Usage:
-'   buI18N().get("some.key");
-'   buI18N().get("some.key", "1", "2", "3");
-'   buI18N().plural("some.key", 1);
+'   buI18N().get("some.key")
+'   buI18N().get("some.key", "1", "2", "3")
+'   buI18N().plural("some.key", 1)
 '
 ' Each translation file is to be saved under its own folder.
 ' For example, for English we would create the i18n/en-GB folder and place a translations.json
 ' file in there.
+'
+' By default it uses the system language, if it fails, it tries with the default one (en-US) and
+' if that also fails, it returns the empty representation ???some.key???
+' 
 '
 ' JSON format is the same used by Goggle Chrome extensions, more information:
 ' https://developer.chrome.com/webstore/i18n#details

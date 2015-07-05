@@ -56,3 +56,12 @@ This includes:
 * getResolution
 * getFirmwareVersion
 * getCurrentLanguage
+
+## buI18N
+Retrieve translation keys from translation files. Usage:
+
+```
+buI18N().get("some.key")
+buI18N().get("some.key", "1", "2", "3")
+buI18N().plural("some.key", 1)
+```
