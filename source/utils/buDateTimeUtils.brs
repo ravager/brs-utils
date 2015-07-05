@@ -58,7 +58,10 @@ function buDateTimeUtils() as Object
                 return _date
             end function,
 
-            ' Parse this 2016/11/03 to a roDateTime
+            ' Parse this 2016/11/03 to a roDateTime or this
+            ' @param {d} String like 2016/11/03
+            ' @param {t} Optional string like 01:02
+            ' @return a roDateTime
             parse: function(d as String, t = "00:00" as String) as Object
                 if d = Invalid then
                     return Invalid
