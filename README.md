@@ -39,6 +39,7 @@ This includes:
 * toArray
 * reverse
 * replace
+* toMD5Hash
 * toString
 
 ## buNumbersUtils
@@ -73,6 +74,14 @@ This includes:
 * deleteEntry
 * deleteAllEntries
 
+## buRandomUtils
+
+* nextInteger
+* nextFloat
+* nextString
+* nextHexString
+* uuid
+
 ## buI18N
 Retrieve translation keys from translation files. Usage:
 
@@ -85,3 +94,6 @@ buI18N().plural("some.key", 1)
 ## buOptional
 A container object which may or may not contain a non-Invalid value. If a value is
 present, isPresent() will return true and get() will return the value.
+
+## buSet
+A very simplistic Set implementation. Only works with BrightScript primitives

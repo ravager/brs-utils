@@ -17,5 +17,6 @@ sub runTests()
     buDeviceUtilsTests()
     buNumbersUtilsTests()
     buSetTests()
+    buRandomUtilsTests()
     buTest().runAllTests()
 end sub
