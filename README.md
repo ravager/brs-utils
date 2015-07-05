@@ -36,6 +36,7 @@ This includes:
 * join
 * toArray
 * reverse
+* replace
 * toString
 
 ## buArrayUtils
@@ -54,3 +55,4 @@ This includes:
 * getAppVersion
 * getResolution
 * getFirmwareVersion
+* getCurrentLanguage

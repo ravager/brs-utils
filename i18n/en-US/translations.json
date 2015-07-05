@@ -1,0 +1,8 @@
+{
+    "test.get": {"message": "Testing", "description": "Just a test."},
+    "test.empty": {"message": "", "description": "Just a test."},
+    "test.params": {"message": "Params {0}, {1}, {2}", "description": "Just a test."},
+    "test.plural.zero": {"message": "No content", "description": "Just a test."},
+    "test.plural.singular": {"message": "One element", "description": "Just a test."},
+    "test.plural.plural": {"message": "{0} elements", "description": "Just a test."}
+}
