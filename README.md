@@ -20,6 +20,7 @@ This includes:
 * isDouble
 * isComparable
 * isNumber
+* isDateTime
 
 ## buStringUtils
 
@@ -81,6 +82,21 @@ This includes:
 * nextString
 * nextHexString
 * uuid
+
+## buDateTimeUtils
+
+* compare
+* isBetween
+* isAfter
+* isBefore
+* dateOf
+* parse
+* toMidnight
+* duration
+* addDays
+* addHours
+* substractDays
+* substractHours
 
 ## buI18N
 Retrieve translation keys from translation files. Usage:

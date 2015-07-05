@@ -61,6 +61,12 @@ function buTypeUtils() as Object
                 if (m.isFloat(obj)) then return true
                 if (m.isDouble(obj)) then return true
                 return false
+            end function,
+
+            isDateTime: function(obj as Dynamic) as Boolean
+                if obj = Invalid return false
+                if getInterface(obj, "ifDateTime") = Invalid return false
+                return true
             end function
         }
     endif

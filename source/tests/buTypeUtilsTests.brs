@@ -79,6 +79,14 @@ function buTypeUtilsTests() as Object
             buTest().assertFalse(buTypeUtils().isNumber({}))
         end function,
 
+        testIsDateTime: function() as Void
+            buTest().assertTrue(buTypeUtils().isDateTime(createObject("roDateTime")))
+            buTest().assertFalse(buTypeUtils().isDateTime("1.2"))
+            buTest().assertFalse(buTypeUtils().isDateTime(Invalid))
+            buTest().assertFalse(buTypeUtils().isDateTime(true))
+            buTest().assertFalse(buTypeUtils().isDateTime(1))
+        end function,
+
         addSuite: function() as Void
             suite = {
                 name: "buTypeUtilsTests",
@@ -91,7 +99,8 @@ function buTypeUtilsTests() as Object
                     { name: "testIsArray", test: m.testIsArray },
                     { name: "testIsList", test: m.testIsList },
                     { name: "testIsComparable", test: m.testIsComparable },
-                    { name: "testIsNumber", test: m.testIsNumber }
+                    { name: "testIsNumber", test: m.testIsNumber },
+                    { name: "testIsDateTime", test: m.testIsDateTime }
                 ]
             }
 
