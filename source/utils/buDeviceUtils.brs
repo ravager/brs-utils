@@ -56,6 +56,64 @@ function buDeviceUtils() as Object
                 roInfo = createObject("roDeviceInfo")
                 locale = roInfo.getCurrentLocale()
                 return buStringUtils().replace(locale, "_", "-")
+            end function,
+
+            writeEntry: function(key as String, value as String, section = "default_section" as String) as Void
+                roRegistry = createObject("roRegistrySection", section)
+                roRegistry.write(key, value)
+                roRegistry.flush()
+            end function,
+
+            readEntry: function(key as String, section = "default_section" as String) as Object
+                roRegistry = createObject("roRegistrySection", section)
+
+                res = Invalid
+
+                if roRegistry.exists(key) then
+                    res = roRegistry.read(key)
+                end if
+
+                return buOptional(res)
+            end function,
+
+            listEntries: function(section = "default_section" as String) as Object
+                roRegistry = createObject("roRegistrySection", section)
+                allKeys = roRegistry.getKeyList()
+
+                res = createObject("roAssociativeArray")
+                for each key in allKeys
+                    res.addReplace(key, roRegistry.read(key))
+                end for
+
+                return res
+            end function,
+
+            listSections: function() as Object
+                roRegistry = createObject("roRegistry")
+                return roRegistry.getSectionList()
+            end function,
+
+            deleteEntry: function(key as String, section = "default_section" as String) as Void
+                roRegistry = createObject("roRegistrySection", section)
+
+                if roRegistry.exists(key) then
+                    roRegistry.delete(key)
+                    roRegistry.flush()
+                end if
+            end function,
+
+            deleteAllEntries: function(section = "default_section" as String) as Void
+                roRegistry = createObject("roRegistrySection", section)
+
+                allKeys = roRegistry.getKeyList()
+                allKeys.resetIndex()
+                key = allKeys.getIndex()
+
+                while key <> Invalid
+                    roRegistry.delete(key)
+                    roRegistry.flush()
+                    key = allKeys.getIndex()
+                end while
             end function
         }
     end if

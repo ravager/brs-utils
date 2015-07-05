@@ -3,11 +3,8 @@
 '
 sub main(args as Dynamic)
     logger = buLogger("main")
-
-    runTests()
-
     logger.info("brs-utils version: {0}", buDeviceUtils().getAppVersion())
-    logger.info("Firmware version: {0}", buDeviceUtils().getFirmwareVersion())
+    runTests()
 end sub
 
 sub runTests()
@@ -16,5 +13,7 @@ sub runTests()
     buStringUtilsTests()
     buArrayUtilsTests()
     buI18NTests()
+    buOptionalTests()
+    buDeviceUtilsTests()
     buTest().runAllTests()
 end sub
