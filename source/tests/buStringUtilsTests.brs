@@ -88,6 +88,10 @@ function buStringUtilsTests() as Object
             buTest().assertEquals(buStringUtils().reverse(""), "")
         end function,
 
+        testReplace: function() as Void
+            buTest().assertEquals(buStringUtils().replace("Lorem, Ipsum", ",", "."), "Lorem. Ipsum")
+        end function,
+
         addSuite: function() as Void
             suite = {
                 name: "buStringUtilsTests",
@@ -105,7 +109,8 @@ function buStringUtilsTests() as Object
                     { name: "testLastIndexOf", test: m.testLastIndexOf },
                     { name: "testJoin", test: m.testJoin },
                     { name: "testToArray", test: m.testToArray },
-                    { name: "testReverse", test: m.testReverse }
+                    { name: "testReverse", test: m.testReverse },
+                    { name: "testReplace", test: m.testReplace }
                 ]
             }
 

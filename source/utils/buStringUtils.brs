@@ -179,6 +179,11 @@ function buStringUtils() as Object
                 return m.join(reversed)
             end function,
 
+            replace: function(text as String, pattern as String, replacement as String) as String
+                roRegex = createObject("roRegex", pattern, "")
+                return roRegex.replace(text, replacement)
+            end function
+
             ' Converts anything to a string, even an Invalid value.
             ' @param {Dynamic} the value to convert to a string.
             ' @returns {String} the converted string or the type if we can't convert
