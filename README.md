@@ -41,6 +41,14 @@ This includes:
 * replace
 * toString
 
+## buNumbersUtils
+
+* max
+* min
+* floor
+* ceiling
+* round
+
 ## buArrayUtils
 
 * equals
