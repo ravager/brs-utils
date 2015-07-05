@@ -50,6 +50,12 @@ function buDeviceUtils() as Object
                 major = v.mid(2, 1)
                 minor = v.mid(5, 1)
                 return major + "." + minor
+            end function,
+
+            getCurrentLanguage: function() as String
+                roInfo = createObject("roDeviceInfo")
+                locale = roInfo.getCurrentLocale()
+                return buStringUtils().replace(locale, "_", "-")
             end function
         }
     end if
