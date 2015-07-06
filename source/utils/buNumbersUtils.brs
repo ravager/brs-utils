@@ -1,3 +1,8 @@
+'
+' Set of utils to work on and transform numbers (Integer, Float & Double)
+' @singleton
+' @returns {Object} the buNumbersUtils singleton
+' @license MIT
 function buNumbersUtils() as Object
     if(m.buNumbersUtils = Invalid) then
         m.buNumbersUtils = {
@@ -65,7 +70,7 @@ function buNumbersUtils() as Object
                 if(buTypeUtils().isNumber(value) = false) then
                     return 0
                 end if
-                
+
                 if value - int(value) >= 0.5 then
                     return int(value) + 1
                 else

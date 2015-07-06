@@ -1,6 +1,9 @@
 '
 ' Testing framework for Roku
 '
+' @singleton
+' @returns {Object} the buTest singleton
+' @license MIT
 function buTest() as Object
     if(m.buTest = Invalid) then
         m.buTest = {

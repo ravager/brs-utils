@@ -1,10 +1,16 @@
 '
 ' Set of utils to work on and transform arrays
-'
+' @singleton
+' @returns {Object} the buArrayUtils singleton
+' @license MIT
 function buArrayUtils() as Object
     if(m.buArrayUtils = Invalid) then
         m.buArrayUtils = {
-            ' Compares each element of an array
+
+            ' Compares each element of an array. Only works with native types
+            ' @param {Dynamic} arr1 - the first array to compare
+            ' @param {Dynamic} arr2 - the second array to compare
+            ' @returns {Boolean} One level deep equality
             equals: function(arr1 as Dynamic, arr2 as Dynamic) as Boolean
                 if(not buTypeUtils().isArray(arr1)) then
                     return false
@@ -27,6 +33,10 @@ function buArrayUtils() as Object
                 return true
             end function,
 
+
+            ' Is empty
+            ' @param {Dynamic} arr - the array to check
+            ' @returns {Boolean} array is empty or Invalid
             isEmpty: function(arr as Dynamic) as Boolean
                 if(arr = Invalid) then
                     return true
@@ -35,29 +45,18 @@ function buArrayUtils() as Object
                 return arr.count() = 0
             end function,
 
+            ' Checks if the element is in the array.
+            ' @param {Dynamic} arr - the array to check
+            ' @param {Dynamic} element - the element to search
+            ' @returns {Boolean} array contains the element
             contains: function(arr as Dynamic, element as Dynamic) as Boolean
-                if(m.isEmpty(arr)) then
-                    return false
-                endif
-
-                if(buTypeUtils().isArray(arr) = false) then
-                    return false
-                endif
-
-                if(buTypeUtils().isComparable(element) = false) then
-                    return false
-                endif
-
-                for each el in arr
-                    ' without a proper equals model this is the best we can do
-                    if(el = element) then
-                        return true
-                    end if
-                end for
-
-                return false
+                return m.indexOf(arr, element) >= 0
             end function,
 
+            ' Checks if the element is in the array and return its position in the array
+            ' @param {Dynamic} arr - the array to check
+            ' @param {Dynamic} element - the element to search
+            ' @returns {Integer} index where the element is located or -1 if not present or cant be searched
             indexOf: function(arr as Dynamic, element as Dynamic) as Integer
                 if(buTypeUtils().isArray(arr) = false) then
                     return -1
@@ -80,6 +79,11 @@ function buArrayUtils() as Object
                 return -1
             end function,
 
+            ' Adds an element to an array in the given index
+            ' @param {Dynamic} arr - the array to modify
+            ' @param {Integer} index - where to insert the element
+            ' @param {Dynamic} element - the element to insert
+            ' @returns {Dynamic} array with or without the element
             add: function(arr as Dynamic, index as Integer, element as Dynamic) as Dynamic
                 if(buTypeUtils().isArray(arr) = false) then
                     return Invalid
@@ -118,6 +122,11 @@ function buArrayUtils() as Object
                 return newArray
             end function
 
+            ' Replaces an element on an array in the given index
+            ' @param {Dynamic} arr - the array to modify
+            ' @param {Integer} index - where to replace the element
+            ' @param {Dynamic} element - the element to replace
+            ' @returns {Dynamic} array with or without the element
             replace: function(arr as Dynamic, index as Integer, element as Dynamic) as Dynamic
                 if(buTypeUtils().isArray(arr) = false) then
                     return Invalid
@@ -147,6 +156,11 @@ function buArrayUtils() as Object
                 return newArray
             end function,
 
+            ' Returns a part of the array
+            ' @param {Dynamic} arr - the array to modify
+            ' @param {Integer} startIndex - where to start
+            ' @param {Integer} endIndex - where to end
+            ' @returns {Dynamic} array part of the original array
             subArray: function(arr as Dynamic, startIndex as Integer, endIndex as Integer) as Dynamic
                 if(m.isEmpty(arr)) then
                     return []
@@ -172,6 +186,9 @@ function buArrayUtils() as Object
                 return newArray
             end function,
 
+            ' Converts an array to String like "[1,2,3]"
+            ' @param {Dynamic} arr - the array to convert
+            ' @returns {String} arr converted to string
             toString: function(arr as Dynamic) as String
                 return buStringUtils().toString(arr)
             end function

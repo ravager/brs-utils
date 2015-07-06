@@ -6,7 +6,7 @@ This includes:
 * A testing framework like jUnit
 * A logger inspired in Log4j
 * A i18n framework for translations
-* A Java like Optional implementation
+* A Java like Optional implementation with error handling (since we don't have exceptions)
 * An example channel with all the different templates and a video player
 
 ## buTypeUtils
@@ -111,8 +111,17 @@ buI18N().plural("some.key", 1)
 ```
 
 ## buOptional
-A container object which may or may not contain a non-Invalid value. If a value is
-present, isPresent() will return true and get() will return the value.
+A container object which may or may not contain a Invalid value or an error.
+If a value is present and there's no error, isPresent() will return true
+and get() will return the value.
+
+To raise errors:
+
+```
+   function someFunc() as Object
+       return buOptional().error("This is an error", 500)
+   end function
+```
 
 ## buSet
 A very simplistic Set implementation. Only works with BrightScript primitives

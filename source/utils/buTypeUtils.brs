@@ -1,6 +1,9 @@
 '
 ' Utils to check the different types
 '
+' @singleton
+' @returns {Object} the buTypeUtils singleton
+' @license MIT
 function buTypeUtils() as Object
     if(m.buTypeUtils = Invalid) then
         m.buTypeUtils = {
@@ -8,37 +11,45 @@ function buTypeUtils() as Object
                 if obj = Invalid return false
                 if getInterface(obj, "ifString") = Invalid return false
                 return true
-            end function
+            end function,
 
             isBool: function(obj as Dynamic) as Boolean
                 if obj = Invalid return false
                 if getInterface(obj, "ifBoolean") = Invalid return false
                 return true
-            end function
+            end function,
+
+            isBoolean: function(obj as Dynamic) as Boolean
+                return m.isBool(obj)
+            end function,
 
             isInt: function(obj as Dynamic) as Boolean
                 if obj = Invalid return false
                 if getInterface(obj, "ifInt") = Invalid return false
                 return true
-            end function
+            end function,
+
+            isInteger: function(obj as Dynamic) as Boolean
+                return m.isInt(obj)
+            end function,
 
             isArray: function(obj as Dynamic) as Boolean
                 if obj = Invalid return false
                 if getInterface(obj, "ifArray") = Invalid return false
                 return true
-            end function
+            end function,
 
             isList: function(obj as Dynamic) as Boolean
                 if obj = Invalid return false
                 if getInterface(obj, "ifList") = Invalid return false
                 return true
-            end function
+            end function,
 
             isFloat: function(obj as Dynamic) as Boolean
                 if obj = Invalid return false
                 if getInterface(obj, "ifFloat") = Invalid return false
                 return true
-            end function
+            end function,
 
             isDouble: function(obj as Dynamic) as Boolean
                 if obj = Invalid return false
@@ -66,6 +77,12 @@ function buTypeUtils() as Object
             isDateTime: function(obj as Dynamic) as Boolean
                 if obj = Invalid return false
                 if getInterface(obj, "ifDateTime") = Invalid return false
+                return true
+            end function,
+
+            isObject: function(obj as Dynamic) as Boolean
+                if obj = Invalid return false
+                if getInterface(obj, "ifAssociativeArray") = Invalid return false
                 return true
             end function
         }

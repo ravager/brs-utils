@@ -1,6 +1,9 @@
 '
 ' Set of utils to work and transform Strings
 '
+' @singleton
+' @returns {Object} the buStringUtils singleton
+' @license MIT
 function buStringUtils() as Object
     if(m.buStringUtils = Invalid) then
         m.buStringUtils = {

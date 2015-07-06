@@ -1,6 +1,8 @@
 '
 ' Set of utilities to generate random values
-'
+' @singleton
+' @returns {Object} the buRandomUtils singleton
+' @license MIT
 function buRandomUtils() as Object
     if(m.buRandomUtils = Invalid) then
         m.buRandomUtils = {

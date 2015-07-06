@@ -1,12 +1,15 @@
 '
 ' Util functions to work with the device
 '
+' @singleton
+' @returns {Object} the buDeviceUtils singleton
+' @license MIT
 function buDeviceUtils() as Object
     if(m.buDeviceUtils = Invalid) then
         m.buDeviceUtils = {
 
             ' Reads from the manifest the application version
-            ' @return {String} with the version like 0.0.1
+            ' @returns {String} with the version like 0.0.1
             getAppVersion: function() as String
                 majorVsersion = "0"
                 minorVersion = "0"
@@ -50,7 +53,7 @@ function buDeviceUtils() as Object
             end function,
 
             ' Get the device's firmware version
-            ' @return {String} the version of the firmware
+            ' @returns {String} the version of the firmware
             getFirmwareVersion: function() as String
                 roInfo = createObject("roDeviceInfo")
                 v = roInfo.getVersion()
@@ -68,9 +71,9 @@ function buDeviceUtils() as Object
             end function,
 
             ' Writes an entry to the registry
-            ' @param {String} key the key of the value
-            ' @param {String} value the value
-            ' @param {String} the section, defaults to default_section
+            ' @param {String} key - the key of the value
+            ' @param {String} value - the value
+            ' @param {String} [section = "default_section"] - the section
             writeEntry: function(key as String, value as String, section = "default_section" as String) as Void
                 roRegistry = createObject("roRegistrySection", section)
                 roRegistry.write(key, value)
@@ -78,8 +81,8 @@ function buDeviceUtils() as Object
             end function,
 
             ' Reads an entry from the registry
-            ' @param {String} key the key of the value
-            ' @param {String} the section, defaults to default_section
+            ' @param {String} key - the key of the value
+            ' @param {String} [section = "default_section"] - the section
             ' @returns {buOptional}
             readEntry: function(key as String, section = "default_section" as String) as Object
                 roRegistry = createObject("roRegistrySection", section)
@@ -94,7 +97,7 @@ function buDeviceUtils() as Object
             end function,
 
             ' List all entries of a section from the registry
-            ' @param {String} the section, defaults to default_section
+            ' @param {String} [section = "default_section"] - the section
             ' @returns {roAssociativeArray} all key values of the section
             listEntries: function(section = "default_section" as String) as Object
                 roRegistry = createObject("roRegistrySection", section)
@@ -116,8 +119,8 @@ function buDeviceUtils() as Object
             end function,
 
             ' Deletes an entry from the registry
-            ' @param {String} key the key of the value
-            ' @param {String} the section, defaults to default_section
+            ' @param {String} key - the key of the value
+            ' @param {String} [section = "default_section"] - the section
             deleteEntry: function(key as String, section = "default_section" as String) as Void
                 roRegistry = createObject("roRegistrySection", section)
 
@@ -128,7 +131,7 @@ function buDeviceUtils() as Object
             end function,
 
             ' Deletes all entries from the registry
-            ' @param {String} the section, defaults to default_section
+            ' @param {String} [section = "default_section"] - the section
             deleteAllEntries: function(section = "default_section" as String) as Void
                 roRegistry = createObject("roRegistrySection", section)
 

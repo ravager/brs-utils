@@ -1,9 +1,5 @@
 '
 ' Retrieve translation keys from translation file.
-' Usage:
-'   buI18N().get("some.key")
-'   buI18N().get("some.key", "1", "2", "3")
-'   buI18N().plural("some.key", 1)
 '
 ' Each translation file is to be saved under its own folder.
 ' For example, for English we would create the i18n/en-GB folder and place a translations.json
@@ -11,11 +7,20 @@
 '
 ' By default it uses the system language, if it fails, it tries with the default one (en-US) and
 ' if that also fails, it returns the empty representation ???some.key???
-' 
 '
 ' JSON format is the same used by Goggle Chrome extensions, more information:
 ' https://developer.chrome.com/webstore/i18n#details
-'/
+'
+' @example
+'   buI18N().get("some.key")
+'   buI18N().get("some.key", "1", "2", "3")
+'
+'   ' requires some.key.zero, some.key.single, some.key.plural entries
+'   buI18N().plural("some.key", 1)
+'
+' @singleton
+' @returns {Object} the buDeviceUtils singleton
+' @license MIT
 function buI18N() as Object
     if(m.i18n = Invalid) then
         m.i18n = {
@@ -26,6 +31,7 @@ function buI18N() as Object
             defLanguage:    "en-US",
             language:       Invalid,
 
+            ' Loads the translations
             loadTranslations: function() as Void
                 if(m.language = Invalid) then
                     m.language = buDeviceUtils().getCurrentLanguage()
@@ -52,6 +58,7 @@ function buI18N() as Object
 
             end function,
 
+            ' Loads the translations for the default language set in {defLanguage}
             loadDefault: function() as Void
                 m.logger.debug("Loading default translations {0}", m.defLanguage)
                 filePath = substitute(m.path, m.defLanguage)
@@ -68,6 +75,13 @@ function buI18N() as Object
                 end if
             end function,
 
+            ' Get the translation text for the given key
+            ' @param {String} key - the key of the translation
+            ' @param {String} [a = ""] - value to replace on translation where {0}
+            ' @param {String} [b = ""] - value to replace on translation where {1}
+            ' @param {String} [c = ""] - value to replace on translation where {2}
+            ' @returns {String} the translation text for the given text and the given values
+            ' or the string representation of the key ???this.is.a.key???
             get: function(key as String, a = "" as String, b = "" as String, c = "" as String) as String
                 if(m.translations = Invalid) then
                     m.loadTranslations()
@@ -86,6 +100,12 @@ function buI18N() as Object
                 return substitute(translation.message, a, b, c)
             end function,
 
+            ' Get the translation plural text for the given key. It will search for .zero
+            ' .singular and .plural entries in the translations
+            ' @param {String} key - the key of the translation
+            ' @param {Integer} items - number of elements to check against
+            ' @returns {String} the translation text for the given text and the given values
+            ' or the string representation of the key ???this.is.a.key???
             plural: function(key as String, items as Integer) as String
                 if(items = 0) then
                     key = key + ".zero"
@@ -98,6 +118,8 @@ function buI18N() as Object
                 return m.get(key, buStringUtils().toString(items))
             end function,
 
+            ' Set the language and reloads the translations
+            ' @param {String} lang - the language code of the translation
             setLanguage: function(lang as String) as Void
                 m.language = lang
                 m.loadTranslations()

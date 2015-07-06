@@ -1,7 +1,8 @@
 '
 ' A very simplistic Set implementation. Very hard to implement
 ' without object hashes. Only works with BrightScript primitives
-'
+' @returns {Object} a buSet
+' @license MIT
 function buSet(data = [] as Dynamic) as Object
 
     return {
