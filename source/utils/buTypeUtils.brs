@@ -7,55 +7,24 @@
 function buTypeUtils() as Object
     if(m.buTypeUtils = Invalid) then
         m.buTypeUtils = {
-            isString: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifString") = Invalid return false
-                return true
-            end function,
 
-            isBool: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifBoolean") = Invalid return false
-                return true
-            end function,
+            isString: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifString") : end function,
 
-            isBoolean: function(obj as Dynamic) as Boolean
-                return m.isBool(obj)
-            end function,
+            isBool: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifBoolean") : end function,
 
-            isInt: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifInt") = Invalid return false
-                return true
-            end function,
+            isBoolean: function(obj as Dynamic) as Boolean : return m.isBool(obj) : end function,
 
-            isInteger: function(obj as Dynamic) as Boolean
-                return m.isInt(obj)
-            end function,
+            isInt: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifInt") : end function,
 
-            isArray: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifArray") = Invalid return false
-                return true
-            end function,
+            isInteger: function(obj as Dynamic) as Boolean : return m.isInt(obj) : end function,
 
-            isList: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifList") = Invalid return false
-                return true
-            end function,
+            isArray: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifArray") : end function,
 
-            isFloat: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifFloat") = Invalid return false
-                return true
-            end function,
+            isList: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifList") : end function,
 
-            isDouble: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifDouble") = Invalid return false
-                return true
-            end function,
+            isFloat: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifFloat") : end function,
+
+            isDouble: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifDouble") : end function,
 
             isComparable: function(obj as Dynamic) as Boolean
                 if (obj = Invalid) then return true
@@ -74,15 +43,13 @@ function buTypeUtils() as Object
                 return false
             end function,
 
-            isDateTime: function(obj as Dynamic) as Boolean
-                if obj = Invalid return false
-                if getInterface(obj, "ifDateTime") = Invalid return false
-                return true
-            end function,
+            isDateTime: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifDateTime") : end function,
 
-            isObject: function(obj as Dynamic) as Boolean
+            isObject: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifAssociativeArray") : end function,
+
+            isType: function (obj as Dynamic, ifType as String) as Boolean
                 if obj = Invalid return false
-                if getInterface(obj, "ifAssociativeArray") = Invalid return false
+                if GetInterface(obj, ifType) = Invalid return false
                 return true
             end function
         }
