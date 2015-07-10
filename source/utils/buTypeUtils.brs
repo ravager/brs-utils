@@ -7,7 +7,6 @@
 function buTypeUtils() as Object
     if(m.buTypeUtils = Invalid) then
         m.buTypeUtils = {
-
             isString: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifString") : end function,
 
             isBool: function(obj as Dynamic) as Boolean : return m.isType(obj, "ifBoolean") : end function,
